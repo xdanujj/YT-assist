@@ -1,0 +1,96 @@
+
+youtube-tutor/
+│
+├── extension/                      # Chrome Extension
+│   ├── public/
+│   │   ├── manifest.json           # MV3 configuration
+│   │   └── icons/                  # Extension icons
+│   │
+│   ├── src/
+│   │   ├── sidepanel/
+│   │   │   ├── App.jsx             # Main chatbot UI
+│   │   │   ├── components/
+│   │   │   │   ├── ChatWindow.jsx
+│   │   │   │   ├── MessageBubble.jsx
+│   │   │   │   ├── ChatInput.jsx
+│   │   │   │   ├── VideoInfo.jsx
+│   │   │   │   └── TopicTimeline.jsx
+│   │   │   └── styles/
+│   │   │       └── sidepanel.css
+│   │   │
+│   │   ├── content/
+│   │   │   └── youtube.js           # Reads video ID and timestamp
+│   │   │
+│   │   ├── background/
+│   │   │   └── service-worker.js    # Extension lifecycle and messaging
+│   │   │
+│   │   ├── services/
+│   │   │   └── api.js               # Calls the FastAPI backend
+│   │   │
+│   │   └── utils/
+│   │       └── timestamp.js
+│   │
+│   ├── index.html
+│   ├── package.json
+│   └── vite.config.js
+│
+├── backend/                        # Python AI backend
+│   ├── app/
+│   │   ├── main.py                 # FastAPI app entry point
+│   │   ├── config.py               # Environment configuration
+│   │   │
+│   │   ├── api/
+│   │   │   ├── routes/
+│   │   │   │   ├── videos.py       # Video registration/status
+│   │   │   │   ├── transcripts.py  # Transcript processing
+│   │   │   │   ├── chat.py         # Ask questions
+│   │   │   │   └── topics.py       # Topic timeline
+│   │   │   └── dependencies.py
+│   │   │
+│   │   ├── schemas/
+│   │   │   ├── video.py            # Request/response models
+│   │   │   ├── transcript.py
+│   │   │   └── chat.py
+│   │   │
+│   │   ├── models/
+│   │   │   ├── video.py            # Database models
+│   │   │   ├── transcript.py
+│   │   │   ├── chat.py
+│   │   │   └── embedding.py
+│   │   │
+│   │   ├── db/
+│   │   │   ├── database.py         # SQLite connection/session
+│   │   │   └── repositories/
+│   │   │       ├── videos.py
+│   │   │       ├── transcripts.py
+│   │   │       └── chats.py
+│   │   │
+│   │   ├── services/
+│   │   │   ├── transcript_service.py
+│   │   │   ├── chunking_service.py
+│   │   │   ├── topic_service.py
+│   │   │   ├── embedding_service.py
+│   │   │   ├── retrieval_service.py
+│   │   │   └── chat_service.py
+│   │   │
+│   │   ├── llm/
+│   │   │   └── ollama_client.py    # Communicates with Ollama
+│   │   │
+│   │   └── utils/
+│   │       └── timestamps.py
+│   │
+│   ├── data/                       # Local runtime data
+│   │   ├── youtube_tutor.db
+│   │   └── vector_index/            # Optional vector index files
+│   │
+│   ├── tests/
+│   │   ├── test_videos.py
+│   │   ├── test_transcripts.py
+│   │   ├── test_retrieval.py
+│   │   └── test_chat.py
+│   │
+│   ├── requirements.txt
+│   └── .env.example
+│
+├── .gitignore
+└── README.md
