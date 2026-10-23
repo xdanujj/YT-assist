@@ -1,23 +1,23 @@
 import os
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from pathlib import Path
+
 from dotenv import load_dotenv
+from sqlalchemy import create_engine
+from sqlalchemy.engine import URL
+from sqlalchemy.orm import declarative_base, sessionmaker
 
-# Load environment variables from .env file
-load_dotenv()
+# Load credentials from backend/.env regardless of the working directory.
+ENV_FILE = Path(__file__).resolve().parents[2] / ".env"
+load_dotenv(ENV_FILE)
 
-# Construct PostgreSQL URL from environment variables
-POSTGRES_USER = os.getenv("POSTGRES_USER", "your_user")
-POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD", "your_password")
-POSTGRES_HOST = os.getenv("POSTGRES_HOST", "localhost")
-POSTGRES_PORT = os.getenv("POSTGRES_PORT", "5432")
-POSTGRES_DB = os.getenv("POSTGRES_DB", "youtube_tutor")
-
-# Create SQLAlchemy engine
-SQLALCHEMY_DATABASE_URL = (
-    f"postgresql+psycopg2://{POSTGRES_USER}:{POSTGRES_PASSWORD}@"
-    f"{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
+# URL.create safely handles special characters in the database password.
+SQLALCHEMY_DATABASE_URL = URL.create(
+    drivername="postgresql+psycopg2",
+    username=os.getenv("POSTGRES_USER"),
+    password=os.getenv("POSTGRES_PASSWORD"),
+    host=os.getenv("POSTGRES_HOST", "localhost"),
+    port=int(os.getenv("POSTGRES_PORT", "5432")),
+    database=os.getenv("POSTGRES_DB"),
 )
 
 # Create engine with connection pooling
