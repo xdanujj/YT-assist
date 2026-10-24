@@ -1,3 +1,7 @@
 .claude/settings.local.json
 backend/.env
+backend/test_data/*.json
+!backend/test_data/.gitkeep
+__pycache__/
+.pytest_cache/
 

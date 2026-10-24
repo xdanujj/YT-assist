@@ -8,7 +8,12 @@ app = FastAPI(title="YouTube Tutor API")
 # The extension is loaded with a unique chrome-extension:// origin in each browser profile.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost", "http://127.0.0.1"],
+    allow_origins=[
+    "http://localhost",
+    "http://127.0.0.1",
+    "https://www.youtube.com",
+    "https://youtu.be",
+],
     allow_origin_regex=r"chrome-extension://.*",
     allow_credentials=False,
     allow_methods=["POST", "OPTIONS"],

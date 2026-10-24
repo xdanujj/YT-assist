@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube Tutor Test Capture",
+  "version": "0.1.0",
+  "description": "Displays a temporary chat panel on YouTube and captures video test data.",
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*", "https://youtu.be/*"],
+      "js": ["src/content/youtube.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "host_permissions": ["http://127.0.0.1:12701/*"]
+}
