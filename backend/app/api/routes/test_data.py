@@ -25,6 +25,8 @@ SERPAPI_TRANSCRIPT_URL = "https://serpapi.com/search.json"
 load_dotenv(Path(__file__).resolve().parents[3] / ".env")
 
 
+'''TESTING SERP API KEY: 1'''
+    
 def fetch_transcript(
     video_id: str,
 ) -> tuple[str, list[dict[str, Any]]]:
